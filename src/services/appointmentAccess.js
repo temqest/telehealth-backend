@@ -27,6 +27,17 @@ const staffRoles = new Set([
   'appointment_system',
 ]);
 
+const publicAppointmentFields = (appointment) => ({
+  appointment_id: appointment.appointment_id,
+  patient_id: appointment.patient_id,
+  patient_name: appointment.patient_name,
+  appointment_type: appointment.appointment_type,
+  scheduled_at: appointment.scheduled_at,
+  duration_minutes: appointment.duration_minutes,
+  reason: appointment.reason,
+  status: appointment.status,
+});
+
 const assertCanJoinAppointment = async (appointmentId, user) => {
   const normalizedAppointmentId = String(appointmentId || '').trim();
   if (!normalizedAppointmentId) {
@@ -63,4 +74,6 @@ const assertCanJoinAppointment = async (appointmentId, user) => {
 
 module.exports = {
   assertCanJoinAppointment,
+  publicAppointmentFields,
+  staffRoles,
 };

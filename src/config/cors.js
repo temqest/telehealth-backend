@@ -1,5 +1,9 @@
 const parseOrigins = () => {
-  const raw = process.env.FRONTEND_ORIGIN || process.env.CORS_ALLOWED_ORIGINS || '';
+  const raw =
+    process.env.ALLOWED_ORIGINS ||
+    process.env.FRONTEND_ORIGIN ||
+    process.env.CORS_ALLOWED_ORIGINS ||
+    '';
   return raw
     .split(',')
     .map((origin) => origin.trim().replace(/\/$/, ''))
@@ -37,6 +41,7 @@ const socketCorsOptions = {
     callback(new Error(`Socket.IO origin not allowed: ${origin}`));
   },
   methods: ['GET', 'POST'],
+  credentials: true,
 };
 
 module.exports = {
